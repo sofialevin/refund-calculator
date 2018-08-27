@@ -49,3 +49,11 @@
 .dropdown a:hover {background-color: #ddd;}
 
 .show {display: block;}
+
+label{margin-left: 20px;}
+#start_date{width:180px; margin: 0 20px 20px 20px;}
+#start_date > span:hover{cursor: pointer;}
+
+label{margin-left: 20px;}
+#end_date{width:180px; margin: 0 20px 20px 20px;}
+#end_date > span:hover{cursor: pointer;}

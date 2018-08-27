@@ -3,6 +3,9 @@ $(function() {
   client.invoke('resize', { width: '100%', height: '200px' });
 });
 
+/* When the user clicks on the button,
+toggle between hiding and showing the dropdown content */
+
 function myFunction() {
     document.getElementById("myDropdown").classList.toggle("show");
 }
@@ -21,3 +24,17 @@ function filterFunction() {
         }
     }
 }
+
+$(function () {
+  $("#start_date").datepicker({ 
+        autoclose: true, 
+        todayHighlight: true
+  }).datepicker('update', new Date());
+});
+
+$(function () {
+  $("#end_date").datepicker({ 
+        autoclose: true, 
+        todayHighlight: true
+  }).datepicker('update', new Date());
+});
