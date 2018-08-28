@@ -2,8 +2,8 @@
 <head>
   <meta charset="utf-8">
   <!-- http://garden.zendesk.com -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.css" rel="stylesheet" type="text/css" />
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.css" rel="stylesheet" type="text/css">
   <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 
@@ -15,24 +15,30 @@
     <option value="199.90">$199.90</option>
   </select>
 </div>
-
-<div>
+<div class="calendar">
+<div class="date-picker">
 	<label>Refund from:</label>
 <div id="start_date" class="input-group date" data-date-format="mm-dd-yyyy">
-    <input class="form-control" type="text" readonly />
+    <input class="form-control" type="text">
     <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
 </div>
 </div>
 
-<div>
+<div class="date-picker">
 	<label>To:</label>
 <div id="end_date" class="input-group date" data-date-format="mm-dd-yyyy">
-    <input class="form-control" type="text" readonly />
+    <input class="form-control" type="text">
     <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
 </div>
 </div>
+</div>
 
-<button type="button" class="btn btn-primary" id="refund">Calculate</button> <form><input type="text" id="result"></form>
+<div class="calculate">
+	<button type="button" class="btn btn-primary" id="refund">Calculate</button>
+	<form><input type="text" id="result"></form>
+</div>
+
+
 
 
 <footer>
@@ -40,7 +46,7 @@
 </footer>
   <!-- https://github.com/zendesk/zendesk_app_framework_sdk -->
   <script src="https://cdn.jsdelivr.net/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.js"></script>
   <script type="text/javascript" src="https://assets.zendesk.com/apps/sdk/2.0/zaf_sdk.js"></script>

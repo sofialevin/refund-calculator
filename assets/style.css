@@ -1,13 +1,43 @@
-label{margin-left: 20px;}
-#start_date{width:180px; margin: 0 20px 20px 20px;}
+label {
+    margin-left: 10px;
+}
+
+#start_date {
+    width:150px; 
+    margin: 0 20px 10px 10px;
+}
+
 #start_date > span:hover{cursor: pointer;}
 
-label{margin-left: 20px;}
-#end_date{width:180px; margin: 0 20px 20px 20px;}
+label {margin-left: 10px;}
+#end_date{ width:150px; margin: 0 20px 10px 10px;}
 #end_date > span:hover{cursor: pointer;}
 
-.form-control {
-    margin-left: 20px;
-    width:180px; 
-    margin: 0 20px 20px 20px;
+#refund {
+    margin-left: 10px;
+    display: inline;
+}
+
+#sel1 {
+    margin-left: 10px;
+    width:150px; 
+    margin: 0 20px 10px 10px;
+}
+
+form {
+    display: inline;
+}
+
+#result {
+    margin-left: 5px;
+    width: 57px;
+}
+
+footer {
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+.calculate {
+    margin-top: 20px;
 }
