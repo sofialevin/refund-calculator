@@ -1,56 +1,54 @@
+<!DOCTYPE html>
 <html>
-<head>
-  <meta charset="utf-8">
-  <!-- http://garden.zendesk.com -->
-  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.css" rel="stylesheet" type="text/css">
-  <link rel="stylesheet" type="text/css" href="style.css">
-</head>
+	<head>
+		<meta charset="utf-8">
+		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.css" rel="stylesheet" type="text/css">
+		<link rel="stylesheet" type="text/css" href="style.css">
+	</head>
 
-<body>
-<div class="form-group">
-  <label for="sel1">Membership:</label>
-  <select class="form-control" id="sel1">
-    <option value="149.90">$149.90</option>
-    <option value="199.90">$199.90</option>
-  </select>
-</div>
-<div class="calendar">
-<div class="date-picker">
-	<label>Refund from:</label>
-<div id="start_date" class="input-group date" data-date-format="mm-dd-yyyy">
-    <input class="form-control" type="text">
-    <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-</div>
-</div>
+	<body>
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-xs-6">
+					<label>Refund from:</label>
+					<div id="start_date" class="input-group date" data-date-format="mm-dd-yyyy">
+				    	<input class="form-control" type="text" readonly />
+				    	<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+					</div>
+				</div>
+				<div class="col-xs-6">
+				    <label>To:</label>
+					<div id="end_date" class="input-group date" data-date-format="mm-dd-yyyy">
+				    	<input class="form-control" type="text" readonly />
+				    	<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+					</div>
+				</div>
+			</div>
+			<div class="form-group">
+	  			<label for="sel1">Membership:</label>
+	  			<select class="form-control" id="sel1">
+	    			<option value="149.90">$149.90</option>
+	    			<option value="199.90">$199.90</option>
+	  			</select>
+			</div>
+			<div class="row">
+				<div class="col-xs-6">
+					<button type="button" class="btn btn-primary" id="refund">Calculate</button>
+				</div>
+				<div class="col-xs-6">
+					<form><input type="text" id="result"></form>
+				</div>
+			</div>
+		</div>
+		
+		<footer>
+	  		<a href="https://github.com/sofialevin/refund-calculator/issues" target="_blank">Report bugs</a>
+		</footer>
 
-<div class="date-picker">
-	<label>To:</label>
-<div id="end_date" class="input-group date" data-date-format="mm-dd-yyyy">
-    <input class="form-control" type="text">
-    <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-</div>
-</div>
-</div>
-
-<div class="calculate">
-	<button type="button" class="btn btn-primary" id="refund">Calculate</button>
-	<form><input type="text" id="result"></form>
-</div>
-
-
-
-
-<footer>
-  <a href="https://github.com/sofialevin/refund-calculator/issues" target="_blank">Report bugs</a>
-</footer>
-  <!-- https://github.com/zendesk/zendesk_app_framework_sdk -->
-  <script src="https://cdn.jsdelivr.net/jquery/3.2.1/jquery.min.js"></script>
-
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.js"></script>
-  <script type="text/javascript" src="https://assets.zendesk.com/apps/sdk/2.0/zaf_sdk.js"></script>
-  <script type="text/javascript" src="main.js"></script>
-
-</body>
+		<script src="https://cdn.jsdelivr.net/jquery/3.2.1/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.js"></script>
+		<script type="text/javascript" src="main.js"></script>
+	</body>
 </html>

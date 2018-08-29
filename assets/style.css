@@ -1,43 +1,24 @@
-label {
-    margin-left: 10px;
-}
-
 #start_date {
-    width:150px; 
-    margin: 0 20px 10px 10px;
+    width: 140px;
 }
 
-#start_date > span:hover{cursor: pointer;}
-
-label {margin-left: 10px;}
-#end_date{ width:150px; margin: 0 20px 10px 10px;}
-#end_date > span:hover{cursor: pointer;}
-
-#refund {
-    margin-left: 10px;
-    display: inline;
+#start_date > span:hover {
+    cursor: pointer;
 }
 
-#sel1 {
-    margin-left: 10px;
-    width:150px; 
-    margin: 0 20px 10px 10px;
+#end_date {
+    width:150px;
 }
 
-form {
-    display: inline;
+#end_date > span:hover {
+    cursor: pointer;
 }
 
-#result {
-    margin-left: 5px;
-    width: 57px;
+div {
+    max-width: 350px;
 }
 
-footer {
-    margin-top: 10px;
-    margin-left: 10px;
-}
-
-.calculate {
-    margin-top: 20px;
+.container-fluid {
+    margin-left: 0;
+    padding-left: 0;
 }
