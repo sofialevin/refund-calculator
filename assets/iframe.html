@@ -13,14 +13,14 @@
 				<div class="col-xs-6">
 					<label>Refund from:</label>
 					<div id="start_date" class="input-group date" data-date-format="mm-dd-yyyy">
-				    	<input class="form-control" type="text" readonly />
+				    	<input class="form-control" type="text">
 				    	<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
 					</div>
 				</div>
 				<div class="col-xs-6">
 				    <label>To:</label>
 					<div id="end_date" class="input-group date" data-date-format="mm-dd-yyyy">
-				    	<input class="form-control" type="text" readonly />
+				    	<input class="form-control" type="text">
 				    	<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
 					</div>
 				</div>
@@ -28,10 +28,14 @@
 			<div class="form-group">
 	  			<label for="sel1">Membership:</label>
 	  			<select class="form-control" id="sel1">
-	    			<option value="149.90">$149.90</option>
-	    			<option value="199.90">$199.90</option>
+	    			<option value="149">$149.00</option>
+	    			<option value="199">$199.00</option>
 	  			</select>
 			</div>
+      <form><label>Discount:</label> 
+        <input type="text" placeholder="0.00" id="discount">
+        </input>
+        </form>
 			<div class="row">
 				<div class="col-xs-6">
 					<button type="button" class="btn btn-primary" id="refund">Calculate</button>
@@ -42,9 +46,9 @@
 			</div>
 		</div>
 		
-		<footer>
+<!--		<footer>
 	  		<a href="https://github.com/sofialevin/refund-calculator/issues" target="_blank">Report bugs</a>
-		</footer>
+		</footer> -->
 
 		<script src="https://cdn.jsdelivr.net/jquery/3.2.1/jquery.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
