@@ -25,34 +25,44 @@
 					</div>
 				</div>
 			</div>
-			<div class="form-group">
+		<div class="row">
+			<div class="form-group col-xs-6">
 	  			<label for="sel1">Membership:</label>
 	  			<select class="form-control" id="sel1">
 	    			<option value="149">$149.00</option>
 	    			<option value="199">$199.00</option>
 	  			</select>
 			</div>
-      <form><label>Discount:</label> 
-        <input type="text" placeholder="0.00" id="discount">
-        </input>
-        </form>
+			<div class="col-xs-6">
+      			<label>Discount:</label> 
+
+      			<form class="form-inline" role="form">
+  <div class="input-group">
+          <div class="input-group-addon">$</div>
+          <input class="form-control" type="text" placeholder="0.00" id="discount">
+        </div>
+</form>
+
+
+    		</div>
+    	</div>
 			<div class="row">
 				<div class="col-xs-6">
-					<button type="button" class="btn btn-primary" id="refund">Calculate</button>
+					<button type="button" class="btn btn-primary" id="refund">Calculate Refund</button>
 				</div>
 				<div class="col-xs-6">
 					<button type="button" class="btn btn-primary" id="reply">Calculate & Reply</button>
 				</div>
 				
 			</div>
-			<div class="col-xs-4">
-					<form><input type="text" id="result"></form>
+			<div>
+					<p id="result" class="text-muted text-center lead" style="font-size:50px">$0.00</p>
 				</div>
 		</div>
 		
-<!--		<footer>
+		<footer class="text-center border-footer" style="border-top: 1px dotted #C2C8CC">
 	  		<a href="https://github.com/sofialevin/refund-calculator/issues" target="_blank">Report bugs</a>
-		</footer> -->
+		</footer>
 		<script src="https://cdn.jsdelivr.net/jquery/3.2.1/jquery.min.js"></script>
 		<script type="text/javascript" src="https://assets.zendesk.com/apps/sdk/2.0/zaf_sdk.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>

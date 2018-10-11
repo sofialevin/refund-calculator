@@ -1,13 +1,11 @@
-#start_date {
+
+
+#start_date #end_date #sel1 #discount {
     width: 140px;
 }
 
 #start_date > span:hover {
     cursor: pointer;
-}
-
-#end_date {
-    width:150px;
 }
 
 #end_date > span:hover {
@@ -22,3 +20,8 @@ div {
     margin-left: 0;
     padding-left: 0;
 }
+
+#refund {
+	width: 136.72px;
+}
+
