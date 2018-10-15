@@ -39,16 +39,15 @@ function refundCalculator () {
     return Math.round((second - first) / (1000 * 60 * 60 * 24))
   }
 
-  resultValue = '$' + (((datediff(parseDate(first), parseDate(second))) / 365) * (membership - discount)).toFixed(2)
+  resultValue = (((datediff(parseDate(first), parseDate(second))) / 365) * (membership - discount)).toFixed(2)
 
-  document.getElementById('result').innerHTML = resultValue
+  document.getElementById('result').innerHTML = '$' + resultValue
   document.getElementById('result').classList.add('text-success')
 }
 
 function copyToClipboard () {
-  var copyText = document.getElementById('result')
   var textArea = document.createElement('textarea')
-  textArea.value = copyText.textContent
+  textArea.value = resultValue
   document.body.appendChild(textArea)
   textArea.select()
   document.execCommand('copy')
