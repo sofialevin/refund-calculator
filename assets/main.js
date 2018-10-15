@@ -46,14 +46,13 @@ function refundCalculator () {
 }
 
 function copyToClipboard () {
-  /* Get the text field */
   var copyText = document.getElementById('result')
-
-  /* Select the text field */
-  copyText.select()
-
-  /* Copy the text inside the text field */
+  var textArea = document.createElement('textarea')
+  textArea.value = copyText.textContent
+  document.body.appendChild(textArea)
+  textArea.select()
   document.execCommand('copy')
+  textArea.remove()
 }
 
 $('#refund').click(function () {
