@@ -1,8 +1,8 @@
 {
   "app": {
     "name": "Zen Tunes",
-    "short_description": "Calculate pro-rated membership refunds.",
-    "long_description": "Calculate pro-rated membership refunds.",
+    "short_description": "Calculate prorated membership refunds.",
+    "long_description": "Calculate prorated membership refunds.",
     "installation_instructions": "Simply click install."
   }
 }
