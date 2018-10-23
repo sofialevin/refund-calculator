@@ -64,7 +64,7 @@ $('#reply').click(function () {
   refundCalculator()
   copyToClipboard()
   $('#reply').tooltip('toggle')
-  client.invoke('ticket.comment.appendHtml', '<p>Hi {{ticket.requester.first_name}}‍,</p><br><p>I have completed the pro-rated refund in the amount of <b>' + resultValue + '</b>, equivalent to the unused portion of the membership between ' + first + ' and ' + second + '. It should fully process in 5-10 business days.</p><br><p>Let us know if you need help with anything else on this request. Have a great week!</p><br><p>Regards,<br>{{current_user.first_name}}‍</p>')
+  client.invoke('ticket.comment.appendHtml', '<p>Hi {{ticket.requester.first_name}}‍,</p><br><p>I have completed the pro-rated refund in the amount of <b>$' + resultValue + '</b>, equivalent to the unused portion of the membership between <b>' + first + '</b> and <b>' + second + '</b>. It should fully process in 5-10 business days.</p><br><p>Let us know if you need help with anything else on this request. Have a great week!</p><br><p>Regards,<br>{{current_user.first_name}}‍</p>')
   client.set('ticket.customField:custom_field_360000188703', 'category__chore')
   client.set('ticket.customField:custom_field_360000187006', 'memberships__refunds__partial_refund')
   client.set('ticket.status', 'solved')
