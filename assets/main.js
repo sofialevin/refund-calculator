@@ -4,68 +4,46 @@ var client = ZAFClient.init()
 
 client.invoke('resize', { width: '100%', height: '300px' })
 
-$(function () {
-  $('#start_date').datepicker({
-    autoclose: true,
-    todayHighlight: true
-  }).datepicker('update', new Date())
+$(document).ready(function() {
+  $(".btn").click(function() {
+    var $this = $(this);
+    $this.button('loading');
+    $("#sub_results").empty(
+      );
+    const subscription = $("#subscriptionID").val();
+    const Url =
+      "https://api.stripe.com/v1/invoices?subscription=" + subscription;
+    $.ajax({
+      url: Url,
+      type: "GET",
+      headers: {
+        Authorization: "Bearer sk_test_Op7lb2k7gDf4C2fxSq3KjVxm"
+      },
+      success: function(result) {
+        $this.button('reset');
+        $("#sub_results").append(
+          '<div id="invoices"></div>'
+          );
+        var invoicesList = result.data;
+        var invoice;
+        for (invoice in invoicesList) {
+          var id = invoicesList[invoice].id;
+          var date = invoicesList[invoice].date;
+          $("#invoices").append(
+            '<button class="btn btn-outline-info" data-toggle="collapse" data-target="#' + id + '">' +
+              id +
+              " " +
+              date +
+              '</button><div id="' + id + '" class="collapse">Lorem ipsum dolor text....</div>'
+          );
+        }
+      },
+      error: function(error) {
+        console.log(`Error${error}`);
+      }
+    });
+  });
+});
 
-  $('#end_date').datepicker({
-    autoclose: true,
-    todayHighlight: true
-  }).datepicker('update', new Date())
-})
 
-var first
-var second
-var resultValue
 
-function refundCalculator () {
-  var membership = $('#sel1').val()
-  first = $('#start_date').data('datepicker').getFormattedDate('mm-dd-yyyy')
-  second = $('#end_date').data('datepicker').getFormattedDate('mm-dd-yyyy')
-  var discount = $('#discount').val()
-
-  // new Date("dateString") is browser-dependent and discouraged, so we'll write
-  // a simple parse function for U.S. date format (which does no error checking)
-  function parseDate (str) {
-    var mdy = str.split('-')
-    return new Date(mdy[2], mdy[0] - 1, mdy[1])
-  }
-
-  function datediff (first, second) {
-    // Take the difference between the dates and divide by milliseconds per day.
-    // Round to nearest whole number to deal with DST.
-    return Math.round((second - first) / (1000 * 60 * 60 * 24))
-  }
-
-  resultValue = (((datediff(parseDate(first), parseDate(second))) / 365) * (membership - discount)).toFixed(2)
-
-  document.getElementById('result').innerHTML = '$' + resultValue
-  document.getElementById('result').classList.add('text-success')
-}
-
-function copyToClipboard () {
-  var textArea = document.createElement('textarea')
-  textArea.value = resultValue
-  document.body.appendChild(textArea)
-  textArea.select()
-  document.execCommand('copy')
-  textArea.remove()
-}
-
-$('#refund').click(function () {
-  refundCalculator()
-  copyToClipboard()
-  $('#refund').tooltip('toggle')
-})
-
-$('#reply').click(function () {
-  refundCalculator()
-  copyToClipboard()
-  $('#reply').tooltip('toggle')
-  client.invoke('ticket.comment.appendHtml', '<p>Hi {{ticket.requester.first_name}}‍,</p><br><p>I have completed the pro-rated refund in the amount of <b>$' + resultValue + '</b>, equivalent to the unused portion of the membership between <b>' + first + '</b> and <b>' + second + '</b>. It should fully process in 5-10 business days.</p><br><p>Let us know if you need help with anything else on this request. Have a great week!</p><br><p>Regards,<br>{{current_user.first_name}}‍</p>')
-  client.set('ticket.customField:custom_field_360000188703', 'category__chore')
-  client.set('ticket.customField:custom_field_360000187006', 'memberships__refunds__partial_refund')
-  client.set('ticket.status', 'solved')
-})
