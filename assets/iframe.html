@@ -9,10 +9,13 @@
 	</head>
 
 	<body>
-		<input type="text" class="form-control" placeholder="Subscription ID" aria-label="Subscription ID" aria-describedby="basic-addon2" id="subscriptionID" value="sub_6i7PEpzl7yVsDk">
-<button type="button" class="btn btn-primary" id="load" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> Getting Subscription">Get Subscription</button>
-<div id="sub_results"></div>
-		
+		<div class="input-group">
+			<input type="text" class="form-control" placeholder="Subscription ID" aria-label="Subscription ID" aria-describedby="basic-addon2" id="subscriptionID" value="sub_6i7PEpzl7yVsDk">
+			<span class="input-group-btn">
+				<button type="button" class="btn btn-primary" id="load" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> Searching">Search</button>
+			</span>
+		</div>
+		<div id="sub-results"></div>
 		<footer class="text-center border-footer" style="border-top: 1px dotted #C2C8CC">
 	  		<a href="https://github.com/sofialevin/refund-calculator/issues" target="_blank">Report bugs</a>
 	  		<a href="https://support.stripe.com/contact" target="_blank">Contact Stripe</a>
