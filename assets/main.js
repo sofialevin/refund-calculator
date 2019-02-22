@@ -18,7 +18,7 @@ function insertDecimal(num) {
   return (num / 100).toFixed(2);
 }
 
-function doRefund(chargeID, amountToRefund, $this) {
+function doRefund(chargeID, amountToRefund, $this, typeOfRefund) {
   $( ".alert" ).remove();
   $.ajax({
     url: "https://api.stripe.com/v1/refunds",
@@ -35,7 +35,7 @@ function doRefund(chargeID, amountToRefund, $this) {
       $('#accordion-' + chargeID).append(
         '<div class="alert alert-success"><strong>Success!</strong></div>');
       $this.button("reset");
-      submitReply();
+      submitReply(typeOfRefund, amountToRefund);
     },
     error: function(error) {
       $('#accordion-' + chargeID).append(
@@ -46,10 +46,10 @@ function doRefund(chargeID, amountToRefund, $this) {
 
 }
 
-function submitReply() {
+function submitReply(typeOfRefund, amountToRefund) {
   client.invoke(
       "ticket.comment.appendHtml",
-      "<p>Hi {{ticket.requester.first_name}},</p><br><p>I have completed the partial refund in the amount of <b>$50.00</b>. It should fully process in 5-10 business days.</p><br><p>Let us know if you need help with anything else on this request. Have a great week!</p><br><p>Regards,<br>{{current_user.first_name}}</p>"
+      "<p>Hi {{ticket.requester.first_name}},</p><br><p>I have completed the" + typeOfRefund + "refund in the amount of <b>$" + insertDecimal(parseInt(amountToRefund)) + "</b>. It should fully process in 5-10 business days.</p><br><p>Let us know if you need help with anything else on this request. Have a great week!</p><br><p>Regards,<br>{{current_user.first_name}}</p>"
     );
     client.set(
       "ticket.customField:custom_field_360000188703",
@@ -98,6 +98,18 @@ function disableRefund(chargeID, amountRemaining) {
   }
 }
 
+function refundType(amountRemaining, amountToRefund) {
+  if (amountRemaining == amountToRefund && amountRemaining != chargeAmount) {
+    return " remaining ";
+  } else if (
+    amountRemaining == amountToRefund && amountRemaining == chargeAmount) {
+    return " full ";
+  } else if (
+    amountRemaining != amountToRefund) {
+    return " partial ";
+  }
+}
+
 $(document).ready(function() {
   $(".search-btn").click(function() {
     var $this = $(this);
@@ -119,7 +131,7 @@ $(document).ready(function() {
         getData(chargeURL).done(function(chargesData) {
           const amountRefunded = insertDecimal(chargesData.amount_refunded);
           const customerID = chargesData.source.customer;
-          const chargeAmount = "$" + insertDecimal(chargesData.amount);
+          const chargeAmount = chargesData.amount;
           const amountRemaining = insertDecimal(
             chargesData.amount - chargesData.amount_refunded
           );
@@ -133,8 +145,8 @@ $(document).ready(function() {
           $("#charges-list").append(
             '<div class="panel-group" id="accordion"><div class="panel panel-default"><div class="charge-header panel-heading"><h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#accordion-' +
               chargeID +
-              '"><table style="display:block;"><tbody style="display:block;"><tr style="display:block;"><td class="charge-amount">' +
-              chargeAmount +
+              '"><table style="display:block;"><tbody style="display:block;"><tr style="display:block;"><td class="charge-amount">$' +
+              insertDecimal(chargeAmount) +
               '</td><td class="charge-date" style="padding-left:160px">' +
               chargeDate +
               '</td></tr></tbody></table></a></h4></div><div class="charge-detail collapse panel-collapse" id="accordion-' +
@@ -156,8 +168,10 @@ $(document).ready(function() {
             var $this = $(this);
             $this.button("loading");
             const amountInDollars = ($("#input-" + chargeID).val());
-            const amountToRefund = (removeDecimalPoint(amountInDollars)) * 100;
-            doRefund(chargeID, amountToRefund, $this);
+            const amountToRefund = removeDecimalPoint((amountInDollars) * 100);          
+            const typeOfRefund = refundType(amountRemaining, amountToRefund);
+            doRefund(chargeID, amountToRefund, $this, typeOfRefund);
+            console.log(typeOfRefund);
           });
         });
         }
