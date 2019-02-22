@@ -90,6 +90,14 @@ function removeDecimalPoint(amountInDollars) {
   return s;
 }
 
+function disableRefund(chargeID, amountRemaining) {
+  if (amountRemaining == 0) {
+    $("#refund-btn-" + chargeID).prop("disabled",true);
+    $("#input-" + chargeID).prop("disabled",true);
+    $("#calculator-btn-" + chargeID).prop("disabled",true);
+  }
+}
+
 $(document).ready(function() {
   $(".search-btn").click(function() {
     var $this = $(this);
@@ -137,9 +145,7 @@ $(document).ready(function() {
               chargeID +
               '">Refund</button></span></div></div></form></div></div></div></div>'
           );
-
- // data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> Refunding"
-
+          disableRefund(chargeID, amountRemaining);
 
           $("#calculator-btn-" + chargeID).on("click", function(event) {
             event.preventDefault();
