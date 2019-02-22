@@ -9,17 +9,69 @@
 	</head>
 
 	<body>
-		<div class="input-group">
-			<input type="text" class="form-control" placeholder="Subscription ID" aria-label="Subscription ID" aria-describedby="basic-addon2" id="subscriptionID" value="sub_6i7PEpzl7yVsDk">
+		<div id="refundApp" style="display:block">
+		<div class="input-group" style="padding-bottom:10px;">
+			<input type="text" class="form-control" placeholder="Subscription ID" aria-label="Subscription ID" aria-describedby="basic-addon2" id="subscriptionID">
 			<span class="input-group-btn">
-				<button type="button" class="btn btn-primary" id="load" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> Searching">Search</button>
+				<button type="button" class="search-btn btn btn-primary" id="load" data-loading-text="<i class='fas fa-circle-notch fa-spin'></i> Searching">Search</button>
 			</span>
 		</div>
 		<div id="sub-results"></div>
-		<footer class="text-center border-footer" style="border-top: 1px dotted #C2C8CC">
+	</div>
+	<div class="container-fluid" id="calculatorApp" style="display:none;">
+			<div class="row">
+				<div class="col-xs-6">
+					<label>Refund from:</label>
+					<div id="start_date" class="input-group date" data-date-format="mm-dd-yyyy" style="padding-bottom: 10px">
+				    	<input class="form-control" type="text">
+				    	<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+					</div>
+				</div>
+				<div class="col-xs-6">
+				    <label>To:</label>
+					<div id="end_date" class="input-group date" data-date-format="mm-dd-yyyy" style="padding-bottom: 10px">
+				    	<input class="form-control" type="text">
+				    	<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+					</div>
+				</div>
+			</div>
+<!-- 		<div class="row">
+			<div class="form-group col-xs-6" style="padding-bottom: 10px">
+	  			<label for="sel1">Membership:</label>
+	  			<select class="form-control" id="sel1">
+	    			<option value="149">$149.00</option>
+	    			<option value="199">$199.00</option>
+	  			</select>
+			</div>
+			<div class="col-xs-6">
+      			<label>Discount:</label> 
+
+      			<form class="form-inline" role="form">
+  <div class="input-group">
+          <div class="input-group-addon">$</div>
+          <input class="form-control" type="text" placeholder="0.00" id="discount"">
+        </div>
+</form>
+    		</div>
+    	</div> -->
+<!-- 			<div class="row">
+				<div class="col-xs-6">
+					<button type="button" class="btn btn-primary" data-placement="top" data-toggle="tooltip" title="Copied to Clipboard" id="refund">Calculate Refund</button>
+				</div>
+				<div class="col-xs-6">
+					<button type="button" class="btn btn-primary" data-placement="top" data-toggle="tooltip" title="Copied to Clipboard" id="reply">Calculate & Reply</button>
+				</div>
+				
+			</div> -->
+			<div>
+					<p id="result" class="text-muted text-center lead" style="font-size:50px">$0.00</p>
+				</div>
+				<div><button class="btn btn-primary" id="done-btn">Done</button></div>
+		</div>
+<!-- 		<footer class="text-center border-footer" style="border-top: 1px dotted #C2C8CC">
 	  		<a href="https://github.com/sofialevin/refund-calculator/issues" target="_blank">Report bugs</a>
 	  		<a href="https://support.stripe.com/contact" target="_blank">Contact Stripe</a>
-		</footer>
+		</footer> -->
 		<script src="https://cdn.jsdelivr.net/jquery/3.2.1/jquery.min.js"></script>
 		<script type="text/javascript" src="https://assets.zendesk.com/apps/sdk/2.0/zaf_sdk.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
