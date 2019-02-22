@@ -46,7 +46,9 @@ $(document).ready(function() {
 
     getData(subUrl).done(function(result) {
       $this.button("reset");
-      $("#sub-results").append('<div id="charges-list" class="accordion"></div>');
+      $("#sub-results").append(
+        '<div id="charges-list" class="accordion"></div>'
+      );
       const subscriptionData = result.data;
       for (let id in subscriptionData) {
         const chargeID = subscriptionData[id].charge;
@@ -56,23 +58,21 @@ $(document).ready(function() {
           const amountRemaining = insertDecimal(
             chargesData.amount - chargesData.amount_refunded
           );
-          const chargeDate = new Date(chargesData.created).toLocaleDateString();
+          const chargeDate = new Date((chargesData.created) * 1000).toLocaleDateString();
           $("#charges-list").append(
-            '<div class="panel-group" id="accordion"><div class="panel panel-default"><div class="charge-header panel-heading"><a data-toggle="collapse" data-parent="#accordion" href="#' +
+            '<div class="panel-group" id="accordion"><div class="panel panel-default"><div class="charge-header panel-heading"><h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#' +
               chargeID +
               '"><table><tr><td class="charge-amount">' +
               chargeAmount +
               '</td><td class="charge-date">' +
               chargeDate +
-              '</td></tr></table></a></div><div class="charge-detail collapse panel-collapse" id="' +
+              '</td></tr></table></a></h4></div><div class="charge-detail collapse panel-collapse" id="' +
               chargeID +
-              '"><div class="input-group panel-body" id="' +
-              chargeID +
-              '"><span class="input-group-addon">$</span><input type="text" class="form-control" aria-label="Refund amount" value="' +
+              '"><div class="panel-body"><form class="form-inline"><div class="form-group mb-2"><div class="input-group"><span class="input-group-addon">$</span><input type="text" aria-describedby="basic-addon1" class="form-control" aria-label="Refund amount" value="' +
               amountRemaining +
-              '"></div><button class="refund-btn" id="refund-btn-' +
+              '"><span class="input-group-btn"><button id="btnFA" class="btn btn-warning"><i class="fas fa-calculator"></i></button><button type="submit" class="refund-btn btn btn-primary mb-2"id="refund-btn-' +
               chargeID +
-              '">Refund</button></div></div></div>'
+              '">Refund</button></span></div></div></form></div></div></div></div>'
           );
           $("#refund-btn-" + chargeID).on("click", function() {
             const chargeToRefund = $(this)
@@ -90,7 +90,6 @@ $(document).ready(function() {
     });
   });
 });
-
 
 
 
