@@ -40,6 +40,7 @@ function doRefund(chargeID, amountToRefund, $this) {
     error: function(error) {
       $('#accordion-' + chargeID).append(
         '<div class="alert alert-danger"><strong>Error!</strong>' + Error + '</div>');
+      $this.button("reset");
     }
   });
 
