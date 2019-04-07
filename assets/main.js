@@ -55,10 +55,20 @@ function submitReply(typeOfRefund, amountToRefund) {
       "ticket.customField:custom_field_360000188703",
       "category__chore"
     );
+    if (typeOfRefund == ' partial ') {
     client.set(
       "ticket.customField:custom_field_360000187006",
-      "memberships__refunds__partial_refund"
-    );
+      "memberships__refunds__partial_refund");
+    } else if (typeOfRefund == ' full ') {
+      client.set(
+      "ticket.customField:custom_field_360000187006",
+      "memberships__refunds__full_refund");
+    } else {
+      client.set(
+      "ticket.customField:custom_field_360000187006",
+      "memberships__refunds__refund_remainder"
+
+    );}
     client.set("ticket.status", "solved");
   }
 
@@ -98,14 +108,14 @@ function disableRefund(chargeID, amountRemaining) {
   }
 }
 
-function refundType(amountRemaining, amountToRefund) {
-  if (amountRemaining == amountToRefund && amountRemaining != chargeAmount) {
-    return " remaining ";
-  } else if (
-    amountRemaining == amountToRefund && amountRemaining == chargeAmount) {
+function refundType(amountRemaining, amountToRefund, chargeAmount) {
+  console.log(amountRemaining, amountToRefund, chargeAmount);
+  if (amountToRefund == chargeAmount) {
     return " full ";
   } else if (
-    amountRemaining != amountToRefund) {
+    amountToRefund !== chargeAmount && amountToRefund == amountRemaining) {
+    return " remaining ";
+  } else if (amountToRefund !== chargeAmount && amountToRefund !== amountRemaining){
     return " partial ";
   }
 }
@@ -122,7 +132,7 @@ $(document).ready(function() {
     getData(subUrl).done(function(result) {
       $this.button("reset");
       $("#sub-results").append(
-        '<div id="charges-list" class="accordion"></div>'
+        '<div id="charges-list" class="accordion"><div class="panel-group" id="accordion"></div></div>'
       );
       const subscriptionData = result.data;
       for (let id in subscriptionData) {
@@ -142,8 +152,8 @@ $(document).ready(function() {
 
           getData(customerURL).done(function(customerData) {
             const customerEmail = customerData.email;
-          $("#charges-list").append(
-            '<div class="panel-group" id="accordion"><div class="panel panel-default"><div class="charge-header panel-heading"><h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#accordion-' +
+          $("#accordion").append(
+            '<div class="panel panel-default"><div class="charge-header panel-heading"><h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#accordion-' +
               chargeID +
               '"><table style="display:block;"><tbody style="display:block;"><tr style="display:block;"><td class="charge-amount">$' +
               insertDecimal(chargeAmount) +
@@ -151,12 +161,13 @@ $(document).ready(function() {
               chargeDate +
               '</td></tr></tbody></table></a></h4></div><div class="charge-detail collapse panel-collapse" id="accordion-' +
               chargeID +
-              '"><div class="panel-body style="padding-bottom:0"><ul class="list-group list-group-flush"><li class="list-group-item"><strong>Email: </strong>' + customerEmail + '</li><li class="list-group-item"><strong>Amount Refunded:</strong> $' + amountRefunded + '</li></ul><form class="form-inline"><div class="form-group mb-2" id="' + chargeID + '"><div class="input-group"><span class="input-group-addon">$</span><input id="input-' + chargeID + '" type="text" aria-describedby="basic-addon1" class="form-control" aria-label="Refund amount" value="' +
+              '"><div class="panel-body" style="padding-bottom:0"><ul class="list-group list-group-flush"><li class="list-group-item"><strong>Email: </strong>' + customerEmail + '</li><li class="list-group-item"><strong>Amount Refunded:</strong> $' + amountRefunded + '</li></ul><form class="form-inline"><div class="form-group mb-2" id="' + chargeID + '"><div class="input-group"><span class="input-group-addon">$</span><input id="input-' + chargeID + '" type="text" aria-describedby="basic-addon1" class="form-control" aria-label="Refund amount" value="' +
               amountRemaining +
-              '"><span class="input-group-btn"><button class="btn btn-warning mb-2" id="calculator-btn-' + chargeID + '"><i class="fas fa-calculator"></i></button><button type="submit" class="refund-btn btn btn-primary mb-2" id="refund-btn-' +
+              '"><span class="input-group-btn"><button class="btn btn-warning mb-2" data-toggle="tooltip" data-placement="top" title="Prorated Refund Calculator" id="calculator-btn-' + chargeID + '"><i class="fas fa-calculator"></i></button><button type="submit" class="refund-btn btn btn-primary mb-2" id="refund-btn-' +
               chargeID +
-              '">Refund</button></span></div></div></form></div></div></div></div>'
+              '">Refund</button></span></div></div></form></div></div></div>'
           );
+          $('[data-toggle="tooltip"]').tooltip();
           disableRefund(chargeID, amountRemaining);
 
           $("#calculator-btn-" + chargeID).on("click", function(event) {
@@ -169,7 +180,7 @@ $(document).ready(function() {
             $this.button("loading");
             const amountInDollars = ($("#input-" + chargeID).val());
             const amountToRefund = removeDecimalPoint((amountInDollars) * 100);          
-            const typeOfRefund = refundType(amountRemaining, amountToRefund);
+            const typeOfRefund = refundType(amountRemaining, amountToRefund, chargeAmount);
             doRefund(chargeID, amountToRefund, $this, typeOfRefund);
             console.log(typeOfRefund);
           });
